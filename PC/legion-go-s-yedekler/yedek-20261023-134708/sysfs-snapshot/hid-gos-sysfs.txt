@@ -1,0 +1,68 @@
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/os_mode <==
+windows
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/os_mode_index <==
+windows linux
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/auto_sleep_time <==
+0
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/auto_sleep_time_range <==
+0-255
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/dpad_mode <==
+8-way
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/dpad_mode_index <==
+8-way 4-way
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/mode <==
+xinput
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/mode_index <==
+xinput dinput
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/poll_rate <==
+250
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/gamepad/poll_rate_index <==
+125 250 500 1000
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/enabled <==
+true
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/enabled_index <==
+false true
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/linux_mode <==
+absolute
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/linux_mode_index <==
+relative absolute
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/manufacturer <==
+BetterLife
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/version <==
+16
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/windows_mode <==
+relative
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/touchpad/windows_mode_index <==
+relative absolute
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/imu/bypass_enabled <==
+true
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/imu/bypass_enabled_index <==
+false true
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/imu/manufacturer <==
+ST
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/imu/sensor_enabled <==
+true
+
+==> /sys/bus/hid/devices/0003:1A86:E310.0003/imu/sensor_enabled_index <==
+false true

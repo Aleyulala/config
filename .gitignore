@@ -6,9 +6,6 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Log/OS Files
-*.log
-
 # Android Studio generated files and folders
 captures/
 .externalNativeBuild/
@@ -33,3 +30,14 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Video files (>100MB exceeds GitHub push limit)
+*.ts
+*.ts1
+
+# Antigravity session placeholder & system files
+topic konusu/
+.Trash-*/
+
+# Sensitive daemon tokens
+*.token

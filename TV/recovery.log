@@ -1,0 +1,278 @@
+_cbThd: sched_setscheduler error -1
+SC_FCT_0: sched_setscheduler 947 error -1
+SC_FCT_0: sched_setscheduler 948 error -1
+SC_FCT_0: sched_setscheduler 949 error -1
+SC_FCT_0: sched_setscheduler 950 error -1
+SC_FCT_0: sched_setscheduler 951 error -1
+SC_FCT_0: sched_setscheduler 952 error -1
+SC_FCT_0: sched_setscheduler 953 error -1
+SC_FCT_0: sched_setscheduler 954 error -1
+SC_FCT_0: sched_setscheduler 955 error -1
+SC_FCT_0: sched_setscheduler 956 error -1
+SC_FCT_0: sched_setscheduler 957 error -1
+SC_FCT_0: sched_setscheduler 958 error -1
+SC_FCT_0: sched_setscheduler 959 error -1
+SC_FCT_0: sched_setscheduler 960 error -1
+set ethernet port power to down return 0
+__bionic_open_tzdata: couldn't find any tzdata when looking for localtime!
+__bionic_open_tzdata: couldn't find any tzdata when looking for GMT!
+__bionic_open_tzdata: couldn't find any tzdata when looking for posixrules!
+Starting MAIN recovery (pid 928) on Tue Aug 18 16:45:55 2026
+recovery filesystem table
+=========================
+  0 /sdcard vfat /dev/block/sda1 0
+  1 /system ext4 /dev/block/mmcblk0p6 0
+  2 /cache ext4 /dev/block/mmcblk0p8 0
+  3 /data ext4 /dev/block/mmcblk0p7 0
+  4 /factory_setting ext4 /dev/block/mmcblk0p9 0
+  5 /user_setting ext4 /dev/block/mmcblk0p16 0
+  6 /perm ext4 /dev/block/mmcblk0p9 0
+  7 /recovery emmc /dev/block/mmcblk0p4 0
+  8 /misc emmc /dev/block/mmcblk0p3 0
+  9 /boot emmc /dev/block/mmcblk0p5 0
+  10 /pq emmc /dev/block/mmcblk0p10 0
+  11 /aq emmc /dev/block/mmcblk0p11 0
+  12 /uboot_env emmc /dev/block/mmcblk0p2 0
+  13 /loader emmc /dev/block/mmcblk0p1 0
+  14 /tmp ramdisk ramdisk 0
+
+SC_FCT_0: sched_setscheduler 961 error -1
+I:Boot command: boot-recovery
+locale is [turkish_TURKEY]
+stage is []
+PIXEL_FORMAT = RGBX
+framebuffer: fd 7 (1920 x 1080)
+       installing_text:  (1 x 1 @ 1896)
+          erasing_text:  (1 x 1 @ 1599)
+       no_command_text:  (1 x 1 @ 1599)
+            error_text:  (1 x 1 @ 1599)
+Command: "/sbin/tpv_recovery" "--update_package=/cache/tvupgrades/wipedatatool.zip" "--locale=turkish_TURKEY"
+
+ro.pm.warmboot=1
+ro.sf.lcd_density=213
+ro.adb.secure=1
+ro.com.google.gmsversion=5.1_r2
+ro.com.android.dateformat=MM-dd-yyyy
+ro.mtk.pip.fullscreen=0
+ro.mtk.4k2k.photo=1
+ro.mtk.camera.facingback=0
+ro.mtk.system.ci.existed=1
+ro.mtk.system.dmv=0
+ro.mtk.system.mhp.existed=1
+ro.mtk.system.ttx.existed=1
+ro.mtk.system.vss.existed=0
+ro.mtk.system.tkui=0
+ro.mtk.system.mheg5.existed=1
+ro.mtk.system.subtitle.existed=1
+ro.mtk.system.audiosync=1
+ro.mtk.system.marketregion=cn
+ro.mtk.system.av_record_lib=1
+ro.mtk.twoworlds=0
+ro.mtk.pkg_version=IDTV1402_368_001_81_001_126
+ro.mtk.disable_scrn_rt=1
+ro.mtk.isSupportHwVenc=1
+ro.mtk.sys_driver_only=1
+ro.mtk.hide_navigation_bar=1
+ro.url.safetylegal=https://www.google.com/policies/privacy/
+ro.boot.mode=mainrec
+ro.boot.serialno=00001c5a6bb984ae
+ro.hdmi.device_type=0
+ro.hwui.path_cache_size=8
+ro.hwui.layer_cache_size=32
+ro.hwui.texture_cache_size=48
+ro.hwui.disable_scissor_opt=true
+ro.hwui.gradient_cache_size=1
+ro.hwui.r_buffer_cache_size=4
+ro.hwui.drop_shadow_cache_size=4
+ro.hwui.text_large_cache_width=2048
+ro.hwui.text_small_cache_width=1024
+ro.hwui.text_large_cache_height=512
+ro.hwui.text_small_cache_height=256
+ro.hwui.texture_cache_flushrate=0
+ro.nrdp.modelgroup=PHTV15AMT0
+ro.wifi.channels=
+ro.allow.mock.location=0
+ro.board.platform=mt5861
+ro.build.id=LMY48N
+ro.build.date=Fri Jul 13 00:56:31 IST 2018
+ro.build.date.utc=1531423591
+ro.build.host=inblrlx047
+ro.build.tags=release-keys
+ro.build.type=user
+ro.build.user=build_ci
+ro.build.flavor=philips_MT5593FHT_EU-user
+ro.build.display.id=LMY48N release-keys
+ro.build.product=philips_MT5593FHT_EU
+ro.build.version.sdk=22
+ro.build.version.asta.sdk=2
+ro.build.version.base_os=
+ro.build.version.release=5.1.1
+ro.build.version.codename=REL
+ro.build.version.incremental=eng
+ro.build.version.all_codenames=REL
+ro.build.version.security_patch=2018-03-05
+ro.build.description=philips_MT5593FHT_EU-user 5.1.1 LMY48N eng release-keys
+ro.build.fingerprint=PHILIPS/philips_MT5593FHT_EU/philips_MT5593FHT_EU:5.1.1/LMY48N/07700:user/release-keys
+ro.build.characteristics=default
+ro.config.low_mem=true
+ro.config.ringtone=Ring_Synth_04.ogg
+ro.config.alarm_alert=Alarm_Classic.ogg
+ro.config.notification_sound=pixiedust.ogg
+ro.dalvik.vm.native.bridge=0
+ro.secure=1
+ro.zygote=zygote32
+ro.carrier=unknown
+ro.product.cpu.abi=armeabi-v7a
+ro.product.cpu.abi2=armeabi
+ro.product.cpu.abilist=armeabi-v7a,armeabi
+ro.product.cpu.abilist32=armeabi-v7a,armeabi
+ro.product.cpu.abilist64=
+ro.product.name=philips_MT5593FHT_EU
+ro.product.board=philips_MT5593FHT_EU
+ro.product.brand=PHILIPS
+ro.product.model=QM152E
+ro.product.device=philips_MT5593FHT_EU
+ro.product.locale.region=GB
+ro.product.locale.language=en
+ro.product.manufacturer=PHILIPS
+ro.baseband=unknown
+ro.bootmode=mainrec
+ro.hardware=mt5861
+ro.opengles.version=131072
+ro.revision=0
+ro.serialno=00001c5a6bb984ae
+ro.tpvision.product.id=QM152E
+ro.tpvision.product.swversion=QM152E.0.7.70.0
+ro.bootloader=unknown
+ro.debuggable=0
+ro.factorytest=0
+ro.setupwizard.mode=OPTIONAL
+ro.def_systemui_existed=0
+ro.cts_test_with_systemui=1
+drm.service.enabled=true
+mtk.omx.verbose.log=0
+mtk.pms.suspend_wait_timeout=10
+mtk.inside=1
+mtk.browser.lowMemoryMode=0
+mtk.browser.useCmpbPlayer=0
+mtk.browser.skipUABlackList=0
+mtk.browser.alwaysFullscreen=0
+mtk.browser.openLinkInSameTab=1
+mtk.browser.freePlayerWhenPause=0
+mtk.disable.screen.lock=1
+mtk.cts_test=0
+mtk.auto_test=0
+mtk.stress_test=0
+mtk.tms_support=0
+mtk.isSupportMHL=1
+mtk.awesomePlayer.dumpbs=0
+mtk.isOnlyCableAtv=1
+mtk.bgm_custom_flow=0
+mtk.boot_log_needed=0
+mtk.mtk_wfd_support=1
+mtk.isSetDtmbGUILang=0
+mtk.mtk_hdmi_support=0
+mtk.mtk_dx_hdcp_support=0
+mtk.mtk_wfd_sink_support=1
+mtk.mtk_wfd_hdcp_tx_support=0
+mtk.multi_screen_interaction=1
+mtk.no_long_press_do_standby=1
+mtk.mtk_wfd_sink_uibc_support=0
+net.bt.name=Android
+net.change=net.bt.name
+net.qtaguid_enabled=0
+png.hw.threshold=512000
+sys.pm.warmboot=1
+sys.pm.warmboot.flag=0
+sys.mtk.keyDisable=0
+sys.vold.autoflag=1
+sys.droidtv.wakeup_reason=COLD_BOOT
+sys.droidtv.wakeup_details.init=1
+sys.droidtv.target_bootlevel=Recovery
+use.cmpb.in.gallery=0
+init.svc.logd=running
+init.svc.console=running
+init.svc.healthd=running
+init.svc.ueventd=running
+init.svc.recovery=running
+init.svc.recovery_config=stopped
+wifi.interface=wlan0
+media.wfd.sink.uibc.cap=NONE
+media.wfd.sink.uibc-enabled=0
+dalvik.vm.isa.arm.features=div
+dalvik.vm.jniopts=warnonly
+dalvik.vm.heapsize=256m
+dalvik.vm.dex2oat-Xms=64m
+dalvik.vm.dex2oat-Xmx=512m
+dalvik.vm.heapmaxfree=8m
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapstartsize=16m
+dalvik.vm.stack-trace-file=/data/anr/traces.txt
+dalvik.vm.image-dex2oat-Xms=64m
+dalvik.vm.image-dex2oat-Xmx=64m
+dalvik.vm.heaptargetutilization=0.75
+persist.sys.usb.config=none
+persist.sys.dalvik.vm.lib.2=libart.so
+persist.sys.strictmode.visual=0
+persist.sys.strictmode.disable=1
+
+update_package name is wipedatatool.zip 
+virgin installation triggered ..
+Performing Virgin Installation .. 
+Opening update package...
+I:read key e=65537 hash=20
+Verifying update package...
+I:comment is 1567 bytes; signature 1549 bytes from end
+I:whole-file signature verified against RSA key 0
+Installing update...
+Warning: No file_contextsabout to run program [/tmp/wipedatatpv.sh] with 1 args
+rm: misc/keystore: Is a directory
+rm: misc: Directory not empty
+rm: property: Is a directory
+rm: security: Permission denied
+__bionic_open_tzdata: couldn't find any tzdata when looking for localtime!
+__bionic_open_tzdata: couldn't find any tzdata when looking for GMT!
+__bionic_open_tzdata: couldn't find any tzdata when looking for posixrules!
+lstat './property' failed: Permission denied
+drwxrwx--x system   system            2026-08-18 16:32 data
+drwxrwx--t system   misc              2026-08-18 16:45 misc
+drwx--x--x system   system            2000-01-01 16:02 security
+about to run program [/sbin/toolbox] with 5 args
+about to run program [/sbin/toolbox] with 4 args
+SELinux: Loaded file_contexts from /file_contexts
+about to run program [/sbin/toolbox] with 4 args
+about to run program [/sbin/toolbox] with 4 args
+about to run program [/sbin/toolbox] with 4 args
+about to run program [/sbin/toolbox] with 4 args
+ls data/data/demome_files-rwxrwxr-x system   everybody          u:object_r:system_data_file:s0 FHD_Demo_Me_clip.mp4
+-rwxr-xr-x system   everybody          u:object_r:unlabeled:s0 Thumbs.db
+-rwxr-xr-x system   everybody          u:object_r:system_data_file:s0 UHD_Demo_Me_clip.mp4
+-rwxr-xr-x system   everybody          u:object_r:system_data_file:s0 demome_version.txt
+
+about to run program [/sbin/toybox] with 6 args
+toybox: Unknown command mount
+run_program: child exited with status 1
+ioffset = 4480 and value=true and ivalue=160
+Prodution S/W
+_cbThd: sched_setscheduler error -1
+MTEEPROM_Write success
+check hdcp 2.2 key
+script succeeded: result was [t]function try_update_binary -- status = 0 returning INSTALL_SUCCESS
+
+function really_install_package -- returnig result  = 0
+function install_package -- returniing result  = 0
+Formatting /cache...
+Creating filesystem with parameters:
+    Size: 1073741824
+    Block size: 4096
+    Blocks per group: 32768
+    Inodes per group: 8192
+    Inode size: 256
+    Journal blocks: 4096
+    Label: 
+    Blocks: 262144
+    Block groups: 8
+    Reserved block group size: 63
+Created filesystem with 11/65536 inodes and 8536/262144 blocks
+copy recovery logs to sdcard ..
+copy recovery logs to sdcard ..
