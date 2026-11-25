@@ -26,10 +26,14 @@ Bu depo (**`Aleyulala/config`**), USB bellek üzerindeki televizyon, telefon ve 
 │
 └── 💻 PC/                                 <-- Bilgisayar ve El Konsolu Araçları
     ├── Micro-Star-International/              (MSI masaüstü bilgisayar)
+    │   ├── README.md
     │   └── claude-kurulum/                    (Fedora Linux için Claude Desktop RPM derleme betiği)
     └── Lenovo-Legion-Go-S/                    (Lenovo Legion Go S el konsolu)
-        ├── legion-go-s-kontrolcu-cozum.sh     (Kontrolcü ve tuş yönetim betiği)
-        └── legion-go-s-yedekler/              (Legion Go modprobe, udev ve hhd sistem yedekleri)
+        ├── README.md                          (Sorun, çözüm ve kullanım)
+        └── legion-go-s-yedekler/
+            ├── legion-go-s-kontrolcu-cozum.sh (Teşhis, yedek, çözüm ve geri alma betiği)
+            ├── ayarlar/                       (touchpad modprobe ayarı, hhd-state.yml)
+            └── referans/                      (sysfs donanım durumu)
 ```
 
 ---
@@ -74,8 +78,7 @@ Bu depo (**`Aleyulala/config`**), USB bellek üzerindeki televizyon, telefon ve 
 ---
 
 ## 💻 3. PC Klasörü (`PC/`)
-| Dosya / Klasör | Açıklama |
+| Klasör | Açıklama |
 | :--- | :--- |
-| **`Lenovo-Legion-Go-S/legion-go-s-kontrolcu-cozum.sh`** | **Lenovo Legion Go S (83L3)** için Linux (Fedora/Ultramarine) gamepad, touchpad, Y1/Y2 tuşları ve Steam Input yönetim ve çözüm betiği. |
-| **`Lenovo-Legion-Go-S/legion-go-s-yedekler/`** | Legion Go S için alınan sistem ve donanım yapılandırma yedekleri. |
-| **`Micro-Star-International/claude-kurulum/`** | Fedora Linux için Claude Desktop uygulamasını derleyip `.rpm` üreten otomasyon betiği. |
+| **`Micro-Star-International/`** | MSI masaüstü bilgisayar yapılandırmaları. Şimdilik `claude-kurulum/` (Fedora için Claude Desktop `.rpm` derleme betiği). |
+| **`Lenovo-Legion-Go-S/`** | **Lenovo Legion Go S (83L3)** el konsolu. `legion-go-s-yedekler/` içinde gamepad, touchpad, Y1/Y2 tuşları ve Steam Input için teşhis/yedek/çözüm/geri alma betiği ve ayar dosyaları var. Ayrıntı için [klasörün README'sine](PC/Lenovo-Legion-Go-S/README.md) bakın. |
