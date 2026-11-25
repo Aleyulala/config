@@ -9,13 +9,24 @@
 #   ./legion-go-s-kontrolcu-cozum.sh yedekle   -> Mevcut ayarların yedeğini alır
 #   ./legion-go-s-kontrolcu-cozum.sh uygula    -> Onay alarak güvenli çözümü uygular
 #   ./legion-go-s-kontrolcu-cozum.sh geri-al   -> Son yedeği geri yükler
+#   ./legion-go-s-kontrolcu-cozum.sh yardim    -> Bu kullanım özetini gösterir
+#
+# Notlar:
+#   - Betik, touchpad ayar dosyasını yanındaki ayarlar/ klasöründen okur; bu yüzden
+#     repodaki klasör yapısı bozulmadan çalıştırılmalıdır.
+#   - Yedekler varsayılan olarak ~/İndirilenler/legion-go-s-yedekler altına alınır.
+#     Başka bir yer için: YEDEK_DIZINI=/yol ./legion-go-s-kontrolcu-cozum.sh yedekle
+#   - Yedeğe /etc/hhd içindeki güvenlik token'ı (.token) KOPYALANMAZ.
 # ==============================================================================
 
 set -u
 
-BACKUP_BASE_DIR="${HOME}/İndirilenler/legion-go-s-yedekler"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SYSFS="${SYSFS_KOK:-/sys}"
+BACKUP_BASE_DIR="${YEDEK_DIZINI:-${HOME}/İndirilenler/legion-go-s-yedekler}"
 LATEST_BACKUP_LINK="${BACKUP_BASE_DIR}/son-yedek"
-HID_GOS_CFG="/sys/bus/hid/devices/0003:1A86:E310.0003"
+TOUCHPAD_CONF_KAYNAK="${SCRIPT_DIR}/ayarlar/lenovo-go-s-touchpad-fix.conf"
+TOUCHPAD_CONF_HEDEF="/etc/modprobe.d/lenovo-go-s-touchpad-fix.conf"
 
 bilgi()  { printf "\n\033[1;34m[BİLGİ]\033[0m %s\n" "$*"; }
 basari() { printf "\033[1;32m[TAMAM]\033[0m %s\n" "$*"; }
@@ -23,12 +34,44 @@ uyari()  { printf "\033[1;33m[UYARI]\033[0m %s\n" "$*"; }
 hata()   { printf "\033[1;31m[HATA]\033[0m %s\n" "$*"; }
 
 # ------------------------------------------------------------------------------
+# CİHAZ YOLLARINI OTOMATİK BULMA
+# Kontrolcü (1a86:e310) her açılışta farklı HID numarası (.0001, .0003 ...) ve USB
+# yolu (5-1, 3-2 ...) alabilir; bu yüzden sabit yol yerine sysfs'ten aranır.
+# ------------------------------------------------------------------------------
+hid_gos_bul() {
+    local d
+    for d in "${SYSFS}"/bus/hid/devices/0003:1A86:E310.*; do
+        if [ -d "$d/touchpad" ]; then
+            echo "$d"
+            return 0
+        fi
+    done
+    return 1
+}
+
+usb_aygit_bul() {
+    local d
+    for d in "${SYSFS}"/bus/usb/devices/*; do
+        case "$(basename "$d")" in *:*) continue ;; esac
+        if [ "$(cat "$d/idVendor" 2>/dev/null)" = "1a86" ] && \
+           [ "$(cat "$d/idProduct" 2>/dev/null)" = "e310" ]; then
+            basename "$d"
+            return 0
+        fi
+    done
+    return 1
+}
+
+HID_GOS_CFG="$(hid_gos_bul || true)"
+USB_AYGIT="$(usb_aygit_bul || echo 5-1)"
+
+# ------------------------------------------------------------------------------
 # 1. SALT OKUNUR TEŞHİS KOMUTLARI (Hiçbir dosyayı/ayarı değiştirmez)
 # ------------------------------------------------------------------------------
 teshis_et() {
     bilgi "1. Dağıtım, Kernel, Cihaz Modeli (DMI), Masaüstü Oturumu ve Steam Paketi Kontrolü"
     echo "-> Dağıtım sürümü (/etc/fedora-release):"
-    cat /etc/fedora-release
+    cat /etc/fedora-release 2>/dev/null || cat /etc/os-release 2>/dev/null
     echo "-> Aktif kernel sürümü (uname -r):"
     uname -r
     echo "-> Anakart ve cihaz modeli (DMI):"
@@ -43,8 +86,8 @@ teshis_et() {
     bilgi "2. USB, HID ve Giriş Aygıtları ile Bağlı Sürücülerin Kontrolü"
     echo "-> USB üzerindeki kontrolcü (lsusb):"
     lsusb | grep -iE '1a86|e310|e311|legion' || lsusb
-    echo "-> 1a86:e310 USB arayüzleri (5-1:1.0 .. 5-1:1.6) ve bağlı sürücüler:"
-    for i in /sys/bus/usb/devices/5-1:1.*; do
+    echo "-> 1a86:e310 USB arayüzleri (${USB_AYGIT}:1.x) ve bağlı sürücüler:"
+    for i in "${SYSFS}"/bus/usb/devices/"${USB_AYGIT}":1.*; do
         if [ -d "$i" ]; then
             drv="$(basename "$(readlink -f "$i/driver" 2>/dev/null)" 2>/dev/null)"
             printf "  %s | if=%s class=%s/%s/%s | driver=%s\n" \
@@ -92,6 +135,7 @@ yedekle() {
     ts="$(date +%Y%m%d-%H%M%S)"
     hedef="${BACKUP_BASE_DIR}/yedek-${ts}"
     mkdir -p "$hedef/etc-modprobe.d" "$hedef/etc-udev-rules.d" "$hedef/steam-config" "$hedef/sysfs-snapshot"
+    chmod 700 "$hedef"
 
     bilgi "Mevcut yapılandırmalar yedekleniyor: $hedef"
     cp -a /etc/modprobe.d/* "$hedef/etc-modprobe.d/" 2>/dev/null || true
@@ -100,7 +144,12 @@ yedekle() {
         cp -a "${HOME}/.local/share/Steam/config/config.vdf" "$hedef/steam-config/config.vdf"
     fi
     if [ -d /etc/hhd ]; then
-        sudo cp -a /etc/hhd "$hedef/etc-hhd" 2>/dev/null || true
+        # Yalnızca ayar dosyaları alınır; .token, lock ve log dosyaları alınmaz.
+        mkdir -p "$hedef/etc-hhd"
+        for f in state.yml plugins.yml; do
+            sudo cp -a "/etc/hhd/$f" "$hedef/etc-hhd/" 2>/dev/null || true
+        done
+        sudo chown -R "$(id -u):$(id -g)" "$hedef/etc-hhd" 2>/dev/null || true
     fi
     if [ -d "$HID_GOS_CFG" ]; then
         head -n 20 "$HID_GOS_CFG"/os_mode* "$HID_GOS_CFG"/gamepad/* "$HID_GOS_CFG"/touchpad/* "$HID_GOS_CFG"/imu/* > "$hedef/sysfs-snapshot/hid-gos-sysfs.txt" 2>&1 || true
@@ -114,6 +163,11 @@ yedekle() {
 # 3. GÜVENLİ ÇÖZÜM UYGULAMA FONKSİYONU
 # ------------------------------------------------------------------------------
 uygula() {
+    if [ ! -f "$TOUCHPAD_CONF_KAYNAK" ]; then
+        hata "Ayar dosyası bulunamadı: $TOUCHPAD_CONF_KAYNAK"
+        hata "Betiği repodaki klasör yapısını bozmadan çalıştırın (ayarlar/ klasörü yanında olmalı)."
+        exit 1
+    fi
     echo "=============================================================================="
     echo "Uygulanacak İşlemler:"
     echo "  1. Mevcut ayarların tam yedeği alınacak."
@@ -138,26 +192,24 @@ uygula() {
     yedekle
 
     bilgi "Adım 1/5: Donanım üzerinde Touchpad etkinleştiriliyor..."
-    if [ -w "${HID_GOS_CFG}/touchpad/enabled" ] || [ -e "${HID_GOS_CFG}/touchpad/enabled" ]; then
+    if [ -n "$HID_GOS_CFG" ] && [ -e "${HID_GOS_CFG}/touchpad/enabled" ]; then
         echo true | sudo tee "${HID_GOS_CFG}/touchpad/enabled" >/dev/null || true
         basari "Touchpad donanım bayrağı 'true' yapıldı."
+    else
+        uyari "Kontrolcü (1a86:e310) sysfs'te bulunamadı, touchpad bayrağı atlandı."
     fi
 
     bilgi "Adım 2/5: Touchpad/Klavye evdev düğümlerini engelleyen hid_lenovo_go_s devre dışı bırakılıyor..."
-    sudo tee /etc/modprobe.d/lenovo-go-s-touchpad-fix.conf >/dev/null <<'EOF'
-# Kernel 7.2.11 hid-lenovo-go-s modülü tüm 1a86:e310 HID arayüzlerini (.0001-.0006)
-# yalnızca HID_CONNECT_HIDRAW (0x04) ile açtığı için hid-multitouch (touchpad) ve
-# hid-generic (klavye) evdev düğümlerinin oluşmasını engeller.
-# Donanım yapılandırması ve özel tuşlar Handheld Daemon (hhd) tarafından yönetilir.
-blacklist hid_lenovo_go_s
-EOF
+    sudo install -m 644 "$TOUCHPAD_CONF_KAYNAK" "$TOUCHPAD_CONF_HEDEF"
     sudo modprobe -r hid_lenovo_go_s 2>/dev/null || true
     sudo modprobe hid_generic 2>/dev/null || true
     sudo modprobe hid_multitouch 2>/dev/null || true
 
-    # USB HID arayüzlerini yeniden bağla (5-1:1.0 ve 5-1:1.2 artık hid-generic ve hid-multitouch'a bağlanır)
-    for intf in 5-1:1.0 5-1:1.2 5-1:1.3 5-1:1.4 5-1:1.5 5-1:1.6; do
-        if [ -e "/sys/bus/usb/devices/${intf}" ]; then
+    # USB HID arayüzlerini yeniden bağla (.0 ve .2 artık hid-generic ve hid-multitouch'a bağlanır).
+    # 1.1 XInput arayüzüdür, xpad'e bağlanacağı için burada dokunulmaz.
+    for n in 0 2 3 4 5 6; do
+        intf="${USB_AYGIT}:1.${n}"
+        if [ -e "${SYSFS}/bus/usb/devices/${intf}" ]; then
             echo "$intf" | sudo tee /sys/bus/usb/drivers/usbhid/unbind >/dev/null 2>&1 || true
             echo "$intf" | sudo tee /sys/bus/usb/drivers/usbhid/bind >/dev/null 2>&1 || true
         fi
@@ -177,7 +229,7 @@ EOF
 
     bilgi "Adım 4/5: xpad modülü yükleniyor ve Legion Go S XInput arayüzüne (1a86:e310) bağlanıyor..."
     sudo modprobe xpad
-    if [ -w /sys/bus/usb/drivers/xpad/new_id ] || [ -e /sys/bus/usb/drivers/xpad/new_id ]; then
+    if [ -e /sys/bus/usb/drivers/xpad/new_id ]; then
         echo "1a86 e310" | sudo tee /sys/bus/usb/drivers/xpad/new_id >/dev/null 2>&1 || true
     fi
     sudo udevadm control --reload-rules
@@ -207,7 +259,7 @@ geri_al() {
     yedek_dizin="$(readlink -f "$LATEST_BACKUP_LINK")"
     bilgi "Son yedek geri yükleniyor: $yedek_dizin"
 
-    sudo rm -f /etc/modprobe.d/lenovo-go-s-touchpad-fix.conf
+    sudo rm -f "$TOUCHPAD_CONF_HEDEF"
     if [ -f "$yedek_dizin/etc-modprobe.d/gamepad-blacklist.conf" ]; then
         sudo cp -a "$yedek_dizin/etc-modprobe.d/gamepad-blacklist.conf" /etc/modprobe.d/gamepad-blacklist.conf
     fi
@@ -240,6 +292,9 @@ case "$komut" in
     geri-al|--geri-al)
         geri_al
         ;;
+    yardim|--yardim|-h|--help)
+        sed -n '7,19p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+        ;;
     menu|--menu)
         echo "=============================================================================="
         echo " Lenovo Legion Go S (Fedora / Ultramarine) Kontrolcü ve Touchpad Aracı"
@@ -261,7 +316,7 @@ case "$komut" in
         esac
         ;;
     *)
-        echo "Kullanım: $0 {uygula|teshis|yedekle|geri-al}"
+        echo "Kullanım: $0 {uygula|teshis|yedekle|geri-al|yardim}"
         exit 1
         ;;
 esac
