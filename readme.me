@@ -24,10 +24,12 @@ Bu depo (**`Aleyulala/config`**), USB bellek üzerindeki televizyon, telefon ve 
 ├── 📱 PHONE/                              <-- Android / Telefon Uygulama ve Araçları
 │   └── waydroid apk-kaydet.sh                 (Fedora'dan Waydroid TV'ye tek tık APK kurucu betik)
 │
-└── 💻 PC/                                 <-- Bilgisayar ve El Konsolu (Legion Go) Araçları
-    ├── legion-go-s-kontrolcu-cozum.sh         (Lenovo Legion Go S kontrolcü ve tuş yönetim betiği)
-    ├── legion-go-s-yedekler/                  (Legion Go modprobe, udev ve hhd sistem yedekleri)
-    └── claude-kurulum/                        (Fedora Linux için Claude Desktop RPM derleme betiği)
+└── 💻 PC/                                 <-- Bilgisayar ve El Konsolu Araçları
+    ├── Micro-Star-International/              (MSI masaüstü bilgisayar)
+    │   └── claude-kurulum/                    (Fedora Linux için Claude Desktop RPM derleme betiği)
+    └── Lenovo-Legion-Go-S/                    (Lenovo Legion Go S el konsolu)
+        ├── legion-go-s-kontrolcu-cozum.sh     (Kontrolcü ve tuş yönetim betiği)
+        └── legion-go-s-yedekler/              (Legion Go modprobe, udev ve hhd sistem yedekleri)
 ```
 
 ---
@@ -74,6 +76,6 @@ Bu depo (**`Aleyulala/config`**), USB bellek üzerindeki televizyon, telefon ve 
 ## 💻 3. PC Klasörü (`PC/`)
 | Dosya / Klasör | Açıklama |
 | :--- | :--- |
-| **`legion-go-s-kontrolcu-cozum.sh`** | **Lenovo Legion Go S (83L3)** için Linux (Fedora/Ultramarine) gamepad, touchpad, Y1/Y2 tuşları ve Steam Input yönetim ve çözüm betiği. |
-| **`legion-go-s-yedekler/`** | Legion Go S için alınan sistem ve donanım yapılandırma yedekleri. |
-| **`claude-kurulum/`** | Fedora Linux için Claude Desktop uygulamasını derleyip `.rpm` üreten otomasyon betiği. |
+| **`Lenovo-Legion-Go-S/legion-go-s-kontrolcu-cozum.sh`** | **Lenovo Legion Go S (83L3)** için Linux (Fedora/Ultramarine) gamepad, touchpad, Y1/Y2 tuşları ve Steam Input yönetim ve çözüm betiği. |
+| **`Lenovo-Legion-Go-S/legion-go-s-yedekler/`** | Legion Go S için alınan sistem ve donanım yapılandırma yedekleri. |
+| **`Micro-Star-International/claude-kurulum/`** | Fedora Linux için Claude Desktop uygulamasını derleyip `.rpm` üreten otomasyon betiği. |
