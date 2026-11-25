@@ -13,20 +13,13 @@ Bu depo (**`Aleyulala/config`**), USB bellek üzerindeki televizyon, telefon ve 
 ├── 📄 .gitignore                         <-- Git yoksayma kuralları
 │
 ├── 📺 TV/                                 <-- Televizyon, Uydu Alıcısı ve Kanal Listeleri
-│   ├── 17_08_2026 AS04HDU_AS05PRO_Liste..db5  (Next/ALi uydu alıcısı kanal veritabanı)
-│   ├── CHANNELLIST.bin                        (Genel Smart TV kanal listesi)
-│   ├── DTVCH_DATABASE.bin                     (Dijital TV / Android TV kanal veritabanı)
-│   ├── GlobalClone00001.TLL                   (LG Smart TV kanal klonlama dosyası)
-│   ├── mb82_sdx.sdx                           (Vestel MB82 anakart kanal listesi)
-│   ├── uploaded_service_list.sdx              (Vestel servis ve kanal listesi)
-│   ├── update.html                            (Philips Flat TV yazılım güncelleme asistanı)
-│   ├── recovery.log & SearchPKG.log           (Smart TV kurtarma ve arama logları)
-│   ├── Clone/ & PhilipsChannelMaps/           (Philips TV kanal haritaları ve logoları)
-│   ├── DVB/ & My_Channellist/                 (DVB-C, DVB-S, DVB-T kanal XML ayarları)
-│   ├── DVR/ & _MSTPVR/                        (Dijital video kayıt klasörleri)
-│   ├── _PVR/                                  (TV yayın kayıtları - .ts video dosyaları yereldir)
-│   ├── Kurtarma_FSCK/                         (Disk onarımından kalan FSCK parçacıkları)
-│   └── LG Smart TV/                           (LG TV USB yapılandırma dizini)
+│   ├── 32TL420U-PZ/                           (Android TV: MediaTek, Philips/TPV yazılımlı)
+│   │   ├── clone-yedek/                       (GlobalClone00001.TLL, Clone/, PhilipsChannelMaps/, DVB/, My_Channellist/)
+│   │   ├── kayitlar/                          (DVR/, _PVR/ — .ts video kayıtları repoda yok, yereldir)
+│   │   └── kurtarma/                          (Kurtarma_FSCK/, recovery.log, SearchPKG.log, update.html)
+│   ├── Vestel-MB82/                           (mb82_sdx.sdx — MB82 anakartlı TV uydu listesi)
+│   ├── uydu-alici/                            (uploaded_service_list.sdx, AS04HDU/AS05PRO .db5 uydu alıcısı listesi)
+│   └── genel-kanal-listeleri/                 (CHANNELLIST.bin, DTVCH_DATABASE.bin — cihazı belirsiz)
 │
 ├── 📱 PHONE/                              <-- Android / Telefon Uygulama ve Araçları
 │   └── waydroid apk-kaydet.sh                 (Fedora'dan Waydroid TV'ye tek tık APK kurucu betik)
@@ -40,8 +33,21 @@ Bu depo (**`Aleyulala/config`**), USB bellek üzerindeki televizyon, telefon ve 
 ---
 
 ## 📺 1. TV Klasörü (`TV/`)
-| Dosya / Klasör | Açıklama ve Cihaz |
+
+> **Not:** Bu düzen yalnızca arşiv içindir. TV, USB'den geri yüklerken `PhilipsChannelMaps/` gibi klasörleri
+> özgün adı ve konumuyla arar. Geri yüklerken ilgili klasörü USB'nin köküne eski yerine kopyalayın.
+
+| Klasör | İçerik ve cihaz |
 | :--- | :--- |
+| **`32TL420U-PZ/`** | `GlobalClone00001.TLL` içinde model adı `32TL420U-PZ` yazan Android TV (MediaTek, Philips/TPV yazılımı). Marka dosyalardan kesin doğrulanamadı. |
+| `32TL420U-PZ/clone-yedek/` | TV'nin klon yedeği: `GlobalClone00001.TLL` (XML), `Clone/` ve `PhilipsChannelMaps/` (`ChannelMap_100`, `ChannelMap_45`), `DVB/`, `My_Channellist/` (DVB-C/S/T XML ayarları). `ChannelMap_45/syslogo.tar` TV'den yarım gelmiş, bozuk. |
+| `32TL420U-PZ/kayitlar/` | `DVR/` ve `_PVR/` kayıt bilgi dosyaları. `.ts` videoları repoda yoktur. |
+| `32TL420U-PZ/kurtarma/` | `Kurtarma_FSCK/` (fsck kurtarma dosyaları, parça değildir), `recovery.log`, `SearchPKG.log`, `update.html` (Philips güncelleme sayfası, başka bir TV'ye ait şablon gibi görünüyor). |
+| **`Vestel-MB82/`** | `mb82_sdx.sdx`: SatcoDX biçiminde uydu listesi, adı Vestel MB82 anakartını gösteriyor. |
+| **`uydu-alici/`** | `uploaded_service_list.sdx` ve `17_08_2026 AS04HDU_AS05PRO_Liste..db5`: uydu alıcısı (Next/ALi AS04 HDU / AS05 Pro) kanal listeleri. |
+| **`genel-kanal-listeleri/`** | `CHANNELLIST.bin` ve `DTVCH_DATABASE.bin`: hangi cihaza ait olduğu belirsiz ikili kanal listeleri. |
+
+--- | :--- |
 | **`GlobalClone00001.TLL`** | **LG Smart TV** kanal listesi klon yedeğidir (USB'den içe/dışa aktarım). |
 | **`mb82_sdx.sdx`** | **Vestel MB82 anakartlı** televizyonlar için uydu/kanal listesi yedeğidir. |
 | **`uploaded_service_list.sdx`** | Vestel ve uyumlu TV'ler için servis ve uydu kanal listesi. |
